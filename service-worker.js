@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mtg30slotmachine/precache-manifest.36f6e16926593d05fb3020971120b7a0.js"
+  "/mtg30/precache-manifest.7ffaf8f9f3a166fb5f3e07deaf88fe94.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/mtg30slotmachine/index.html", {
+workbox.routing.registerNavigationRoute("/mtg30/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
