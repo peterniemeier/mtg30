@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mtg30/precache-manifest.c9204038cd3d1d1101eeff121a8adb1d.js"
+  "/mtg30/precache-manifest.7dd261e0ec2b3ab1c4ebf8a548289eae.js"
 );
 
 workbox.clientsClaim();
