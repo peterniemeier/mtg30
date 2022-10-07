@@ -125,7 +125,7 @@ class Slots extends Component{
     }
 
     rareIndex() {
-      return Math.floor((Math.random() * 122) + 1);
+      return Math.floor(Math.random() * 122);
     }
 
     rareWasDual(rare) {
