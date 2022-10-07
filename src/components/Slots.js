@@ -122,7 +122,7 @@ class Slots extends Component{
       let newPackCount = 0;
       let oldSpent = this.state.packsOpened;
       while (allRares.size < 113) {
-        console.log(allRares.length + " Rares discovered");
+        console.log(allRares.size + " Rares discovered");
         // increment packs opened
         newPackCount += 4
 
