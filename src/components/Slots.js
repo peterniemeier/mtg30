@@ -19,6 +19,7 @@ class Slots extends Component{
       this.clearState = this.clearState.bind(this);
       this.getPowerNine = this.getPowerNine.bind(this);
       this.getLotus = this.getLotus.bind(this);
+      this.getAllRares = this.getAllRares.bind(this);
       let raresFound = [];
       let statement = ""
       let moneySpent = 0;
@@ -60,9 +61,6 @@ class Slots extends Component{
         for (let i = 0; i < 4; i++) {
           const idx = this.rareIndex();
           console.log("Rare index was ".concat(idx));
-          if (idx === 123) {
-            alert("hi");
-          }
           const rare = rares[idx];
           // was rare a dual?
           if (this.rareWasDual(rare)) {
@@ -112,6 +110,74 @@ class Slots extends Component{
       this.forceUpdate();
     }
 
+    getAllRares() {
+      this.clearState();
+      let newSpent = 0
+      let allRares = [];
+      let raresFound = [];
+      let oldDualCount = 0;
+      let oldPowerCount = 0;
+      let newDualsFound = 0;
+      let newPowerFound = 0;
+      let newPackCount = 0;
+      let oldSpent = this.state.packsOpened;
+      while (allRares.length < 113) {
+        console.log(allRares.length + " Rares discovered");
+        // increment packs opened
+        newPackCount += 4
+
+        // increment money spent
+        newSpent += 999;
+        // Bust 4 packs
+        for (let i = 0; i < 4; i++) {
+          const idx = this.rareIndex();
+          console.log("Rare index was ".concat(idx));
+          const rare = rares[idx];
+          if (!allRares.includes(rare)) {
+            allRares.push(rare);
+          }
+          // was rare a dual?
+          if (this.rareWasDual(rare)) {
+            newDualsFound++;
+          }
+          // was rare power?
+          if (this.rareWasPower(rare)) {
+            newPowerFound++
+          }
+          raresFound.push(rare);
+          // was old bordered card a dual or power?
+          const oldCard = this.getOldBorderCard();
+          if (oldCard !== null) {
+            if (this.rareWasDual(oldCard)) {
+              newDualsFound++;
+            }
+            if (this.rareWasPower(oldCard)) {
+              newPowerFound++
+            }
+            raresFound.push(oldCard.concat(": Old Frame"));
+          }
+        }
+      }
+      const newDualCount = oldDualCount + newDualsFound;
+      const newPowerCount = oldPowerCount + newPowerFound;
+
+      const newDollarsPerDual = (newDualCount === 0 ? "N/A" : (newSpent / newDualCount).toFixed(2));
+      const newDollarsPerPower = (newPowerCount === 0 ? "N/A" : (newSpent / newPowerCount).toFixed(2));
+      const outcome = "You spent $" + newSpent + " opening " + newPackCount + " packs to acquire all rares.";
+      this.setState({
+        statement: outcome,
+        raresFound: raresFound,
+        moneySpent: newSpent,
+        packsOpened: newPackCount,
+        dualsOpened: newDualCount,
+        powerOpened: newPowerCount,
+        dollarsPerDual: newDollarsPerDual,
+        dollarsPerPower: newDollarsPerPower
+      });
+      console.log(allRares);
+      this.forceUpdate();
+    }
+
     getLotus() {
       this.clearState();
       let newSpent = 0
@@ -132,9 +198,6 @@ class Slots extends Component{
         for (let i = 0; i < 4; i++) {
           const idx = this.rareIndex();
           console.log("Rare index was ".concat(idx));
-          if (idx === 123) {
-            alert("hi");
-          }
           const rare = rares[idx];
           // was rare a dual?
           if (this.rareWasDual(rare)) {
@@ -201,9 +264,6 @@ class Slots extends Component{
       for (let i = 0; i < 4; i++) {
         const idx = this.rareIndex();
         console.log("Rare index was ".concat(idx));
-        if (idx === 123) {
-          alert("hi");
-        }
         const rare = rares[idx];
         // was rare a dual?
         if (this.rareWasDual(rare)) {
@@ -322,6 +382,9 @@ class Slots extends Component{
             </div>
             <div id="clear">
               <input id="getLotus" type="button" value="Pull for a Black Lotus" onClick={this.getLotus}/>
+            </div>
+            <div id="clear">
+              <input id="getAllRares" type="button" value="Pull until all Rares collected" onClick={this.getAllRares}/>
             </div>
             <div class="slots">
             <div class="statement">
