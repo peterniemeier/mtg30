@@ -113,7 +113,7 @@ class Slots extends Component{
     getAllRares() {
       this.clearState();
       let newSpent = 0
-      let allRares = [];
+      let allRares = new Set();
       let raresFound = [];
       let oldDualCount = 0;
       let oldPowerCount = 0;
@@ -121,7 +121,7 @@ class Slots extends Component{
       let newPowerFound = 0;
       let newPackCount = 0;
       let oldSpent = this.state.packsOpened;
-      while (allRares.length < 113) {
+      while (allRares.size < 113) {
         console.log(allRares.length + " Rares discovered");
         // increment packs opened
         newPackCount += 4
@@ -133,8 +133,8 @@ class Slots extends Component{
           const idx = this.rareIndex();
           console.log("Rare index was ".concat(idx));
           const rare = rares[idx];
-          if (!allRares.includes(rare)) {
-            allRares.push(rare);
+          if (!allRares.has(rare)) {
+            allRares.add(rare);
           }
           // was rare a dual?
           if (this.rareWasDual(rare)) {
