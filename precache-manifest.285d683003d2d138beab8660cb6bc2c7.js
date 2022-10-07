@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ee99f8d2c8725a076d5c",
+    "revision": "301c6687bd6029ef7217",
     "url": "/mtg30/static/css/main.21cc87e4.chunk.css"
   },
   {
-    "revision": "ee99f8d2c8725a076d5c",
-    "url": "/mtg30/static/js/main.ee99f8d2.chunk.js"
+    "revision": "301c6687bd6029ef7217",
+    "url": "/mtg30/static/js/main.301c6687.chunk.js"
   },
   {
     "revision": "206e060bd7d3afd2158d",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/mtg30/static/js/runtime~main.b9ad4f87.js"
   },
   {
-    "revision": "e7b27cfe74a0b6a25be263ca5fb547b5",
+    "revision": "b51e17111bf9696cc1267fbdd83a627c",
     "url": "/mtg30/index.html"
   }
 ];

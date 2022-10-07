@@ -1,7 +1,7 @@
 {
   "main.css": "/mtg30/static/css/main.21cc87e4.chunk.css",
-  "main.js": "/mtg30/static/js/main.ee99f8d2.chunk.js",
-  "main.js.map": "/mtg30/static/js/main.ee99f8d2.chunk.js.map",
+  "main.js": "/mtg30/static/js/main.301c6687.chunk.js",
+  "main.js.map": "/mtg30/static/js/main.301c6687.chunk.js.map",
   "static/js/1.206e060b.chunk.js": "/mtg30/static/js/1.206e060b.chunk.js",
   "static/js/1.206e060b.chunk.js.map": "/mtg30/static/js/1.206e060b.chunk.js.map",
   "static/js/2.7df12dec.chunk.js": "/mtg30/static/js/2.7df12dec.chunk.js",
@@ -10,6 +10,6 @@
   "runtime~main.js.map": "/mtg30/static/js/runtime~main.b9ad4f87.js.map",
   "static/css/main.21cc87e4.chunk.css.map": "/mtg30/static/css/main.21cc87e4.chunk.css.map",
   "index.html": "/mtg30/index.html",
-  "precache-manifest.34d882122a864cef486d83a5f4a45885.js": "/mtg30/precache-manifest.34d882122a864cef486d83a5f4a45885.js",
+  "precache-manifest.285d683003d2d138beab8660cb6bc2c7.js": "/mtg30/precache-manifest.285d683003d2d138beab8660cb6bc2c7.js",
   "service-worker.js": "/mtg30/service-worker.js"
 }
