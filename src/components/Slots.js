@@ -4,6 +4,7 @@ import duals from '../duals.js';
 import power from '../power.js';
 import RaresFound from './RaresFound.js';
 import MoneySpent from './MoneySpent.js';
+import Statement from './Statement.js';
 import DualsOpened from './DualsOpened.js';
 import PowerOpened from './PowerOpened.js';
 import PacksOpened from './PacksOpened.js';
@@ -16,7 +17,10 @@ class Slots extends Component{
       super(props);
       this.pullTheLever = this.pullTheLever.bind(this);
       this.clearState = this.clearState.bind(this);
+      this.getPowerNine = this.getPowerNine.bind(this);
+      this.getLotus = this.getLotus.bind(this);
       let raresFound = [];
+      let statement = ""
       let moneySpent = 0;
       let packsOpened = 0;
       let dualsOpened = 0;
@@ -24,6 +28,7 @@ class Slots extends Component{
       let dollarsPerDual = dualsOpened === 0 ? "N/A" : (dualsOpened / moneySpent);
       let dollarsPerPower = powerOpened === 0 ? "N/A" : (powerOpened / moneySpent);
       this.state = {
+        statement: statement,
         raresFound: raresFound,
         moneySpent: moneySpent,
         packsOpened: packsOpened,
@@ -32,6 +37,150 @@ class Slots extends Component{
         dollarsPerDual: dollarsPerDual,
         dollarsPerPower: dollarsPerPower,
       };
+    }
+
+    getPowerNine() {
+      this.clearState();
+      let newSpent = 0
+      let powerNine = [];
+      let raresFound = [];
+      let oldDualCount = 0;
+      let oldPowerCount = 0;
+      let newDualsFound = 0;
+      let newPowerFound = 0;
+      let newPackCount = 0;
+      let oldSpent = this.state.packsOpened;
+      while (powerNine.length < 9) {
+        // increment packs opened
+        newPackCount += 4
+
+        // increment money spent
+        newSpent += 999;
+        // Bust 4 packs
+        for (let i = 0; i < 4; i++) {
+          const idx = this.rareIndex();
+          console.log("Rare index was ".concat(idx));
+          if (idx === 123) {
+            alert("hi");
+          }
+          const rare = rares[idx];
+          // was rare a dual?
+          if (this.rareWasDual(rare)) {
+            newDualsFound++;
+          }
+          // was rare power?
+          if (this.rareWasPower(rare)) {
+            newPowerFound++
+            if (!powerNine.includes(rare)) {
+              powerNine.push(rare);
+            }
+          }
+          raresFound.push(rare);
+          // was old bordered card a dual or power?
+          const oldCard = this.getOldBorderCard();
+          if (oldCard !== null) {
+            if (this.rareWasDual(oldCard)) {
+              newDualsFound++;
+            }
+            if (this.rareWasPower(oldCard)) {
+              newPowerFound++
+              if (!powerNine.includes(rare)) {
+                powerNine.push(rare);
+              }
+            }
+            raresFound.push(oldCard.concat(": Old Frame"));
+          }
+        }
+      }
+      const newDualCount = oldDualCount + newDualsFound;
+      const newPowerCount = oldPowerCount + newPowerFound;
+
+      const newDollarsPerDual = (newDualCount === 0 ? "N/A" : (newSpent / newDualCount).toFixed(2));
+      const newDollarsPerPower = (newPowerCount === 0 ? "N/A" : (newSpent / newPowerCount).toFixed(2));
+      const outcome = "You spent $" + newSpent + " opening " + newPackCount + " packs to acquire the power 9.";
+      this.setState({
+        statement: outcome,
+        raresFound: raresFound,
+        moneySpent: newSpent,
+        packsOpened: newPackCount,
+        dualsOpened: newDualCount,
+        powerOpened: newPowerCount,
+        dollarsPerDual: newDollarsPerDual,
+        dollarsPerPower: newDollarsPerPower
+      });
+      console.log(powerNine);
+      this.forceUpdate();
+    }
+
+    getLotus() {
+      this.clearState();
+      let newSpent = 0
+      let raresFound = [];
+      let oldDualCount = 0;
+      let oldPowerCount = 0;
+      let newDualsFound = 0;
+      let newPowerFound = 0;
+      let newPackCount = 0;
+      let oldSpent = this.state.packsOpened;
+      let lotusFound = false;
+      while (!lotusFound) {
+        // increment money spent
+        newSpent = newSpent + 999;
+        // increment packs opened
+        newPackCount += 4
+        // Bust 4 packs
+        for (let i = 0; i < 4; i++) {
+          const idx = this.rareIndex();
+          console.log("Rare index was ".concat(idx));
+          if (idx === 123) {
+            alert("hi");
+          }
+          const rare = rares[idx];
+          // was rare a dual?
+          if (this.rareWasDual(rare)) {
+            newDualsFound++;
+          }
+          // was rare power?
+          if (this.rareWasPower(rare)) {
+            newPowerFound++
+            if (rare === "Black Lotus") {
+              lotusFound = true;
+            }
+          }
+          raresFound.push(rare);
+          // was old bordered card a dual or power?
+          const oldCard = this.getOldBorderCard();
+          if (oldCard !== null) {
+            if (this.rareWasDual(oldCard)) {
+              newDualsFound++;
+            }
+            if (this.rareWasPower(oldCard)) {
+              newPowerFound++
+              if (oldCard === "Black Lotus") {
+                lotusFound = true;
+              }
+            }
+            raresFound.push(oldCard.concat(": Old Frame"));
+          }
+        }
+      }
+      const newDualCount = oldDualCount + newDualsFound;
+      const newPowerCount = oldPowerCount + newPowerFound;
+
+      const newDollarsPerDual = (newDualCount === 0 ? "N/A" : (newSpent / newDualCount).toFixed(2));
+      const newDollarsPerPower = (newPowerCount === 0 ? "N/A" : (newSpent / newPowerCount).toFixed(2));
+      const outcome = "You spent $" + newSpent + " opening " + newPackCount + " packs to find Black Lotus.";
+      this.setState({
+        statement: outcome,
+        raresFound: raresFound,
+        moneySpent: newSpent,
+        packsOpened: newPackCount,
+        dualsOpened: newDualCount,
+        powerOpened: newPowerCount,
+        dollarsPerDual: newDollarsPerDual,
+        dollarsPerPower: newDollarsPerPower
+      });
+      this.forceUpdate();
     }
 
     pullTheLever() {
@@ -96,6 +245,7 @@ class Slots extends Component{
 
     clearState() {
       this.setState({
+        statement: "",
         raresFound: [],
         moneySpent: 0,
         packsOpened: 0,
@@ -139,6 +289,7 @@ class Slots extends Component{
     render() {
       const {
         state: {
+          statement,
           raresFound,
           moneySpent,
           packsOpened,
@@ -166,7 +317,16 @@ class Slots extends Component{
             <div id="clear">
               <input id="clearButton" type="button" value="Start Over" onClick={this.clearState}/>
             </div>
+            <div id="clear">
+              <input id="getPowerNine" type="button" value="Pull until all Power 9 are acquired" onClick={this.getPowerNine}/>
+            </div>
+            <div id="clear">
+              <input id="getLotus" type="button" value="Pull for a Black Lotus" onClick={this.getLotus}/>
+            </div>
             <div class="slots">
+            <div class="statement">
+              <Statement statement={statement}/>
+            </div>
               <div class="moneySpent">
                 <MoneySpent moneySpent={moneySpent}/>
               </div>

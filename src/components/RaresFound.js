@@ -11,13 +11,13 @@ class RaresFound extends Component{
       const cards = [];
       for (let i = 0; i < allCardsFound.length; i++) {
         const card = allCardsFound[allCardsFound.length - i - 1];
-        cards.push(<li class="individualCard">{card}</li>);
+        cards.push(<li class="individualCard" key={i}>{card}</li>);
       }
         return (
           <div>
             <div class="raresFound">
               Rares Cracked:
-              <ui class="cardsList">{cards}</ui>
+              {cards}
             </div>
           </div>
         )
