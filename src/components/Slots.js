@@ -317,9 +317,10 @@ class Slots extends Component{
     }
 
     isOldBorderedCardRare() {
-      const rng = Math.floor((Math.random() * 10) + 1);
+      const rng = parseFloat((Math.random() * (0 - 10) + 10).toFixed(4));
+      console.log("To determine if old border is rare, check if " + rng + " is less than or equal to 2.9746.");
       let result = false;
-      if (rng < 4) {
+      if (rng <= 2.9746) {
         result = true;
       }
       return result;
