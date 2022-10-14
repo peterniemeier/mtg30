@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/mtg30/static/js/runtime~main.b9ad4f87.js"
   },
   {
-    "revision": "417f9480521354372ce8ee9473cccd79",
+    "revision": "720c91a7334c7d4988eaf62366fa5ef2",
     "url": "/mtg30/index.html"
   }
 ];
