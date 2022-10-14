@@ -363,7 +363,7 @@ class Slots extends Component{
         return (
           <div>
           <div id="appname">
-          MTG 30 Simulator
+          MTG 30th Edition Simulator
           </div>
             <div id="widgets">
                 <form action="https://www.paypal.com/donate" method="post" target="_top">
